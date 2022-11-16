@@ -6,5 +6,4 @@ CREATE TABLE IF NOT EXISTS client(
     PRIMARY KEY (id),
     UNIQUE (nui)
 
-
 )
