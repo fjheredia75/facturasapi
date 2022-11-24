@@ -13,7 +13,6 @@ class Invoice {
     var id: Long? = null
     @NotBlank
     var code: String? = null
-    @NotBlank
     @Column(name="create_at")
     var createAt: Date? = null
     var total: Double?=null

@@ -12,8 +12,10 @@ class Product {
     @Id
     @Column(updatable = false)
     var id: Long? = null
-    var description : String? = null
-    var brand: String? = null
     @NotBlank
+    var description : String? = null
+    @NotBlank
+    var brand: String? = null
+
     var stock: Long? = null
 }
