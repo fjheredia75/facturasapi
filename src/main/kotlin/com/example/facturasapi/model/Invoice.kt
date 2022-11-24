@@ -2,6 +2,7 @@ package com.example.facturasapi.model
 
 import java.util.*
 import javax.persistence.*
+import javax.validation.constraints.NotBlank
 
 @Entity
 @Table(name="invoice")
@@ -10,7 +11,9 @@ class Invoice {
     @Id
     @Column(updatable = false)
     var id: Long? = null
+    @NotBlank
     var code: String? = null
+    @NotBlank
     @Column(name="create_at")
     var createAt: Date? = null
     var total: Double?=null

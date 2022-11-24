@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
 @RequestMapping("/client")
@@ -20,7 +21,7 @@ class ClientController {
         return clientService.list()
     }
     @PostMapping
-    fun save(@RequestBody client:Client):ResponseEntity<Client>{
+    fun save(@RequestBody @Valid client:Client):ResponseEntity<Client>{
         return ResponseEntity(clientService.save(client), HttpStatus.OK)
     }
 

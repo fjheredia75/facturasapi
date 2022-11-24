@@ -1,32 +1,29 @@
 package com.example.facturasapi.service
 
-import com.example.facturasapi.model.Invoice
-import com.example.facturasapi.repository.ClientRepository
-import com.example.facturasapi.repository.InvoiceRepository
+import com.example.facturasapi.model.Product
+import com.example.facturasapi.repository.ProductRepository
+
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class InvoiceService {
+class ProductService {
+
+
 
     @Autowired
-    lateinit var invoiceRepository: InvoiceRepository
+    lateinit var productRepository: ProductRepository
 
-    @Autowired
-    lateinit var clientRepository: ClientRepository
-
-    fun list():List<Invoice>{
-        return invoiceRepository.findAll()
+    fun list():List<Product>{
+        return productRepository.findAll()
     }
 
 
-    fun save(invoice: Invoice):Invoice{
-    try {
-        clientRepository.findByid(invoice.clientId)
-            ?: throw Exception("Cliente no existe")
-        return invoiceRepository.save(invoice)
+    fun save(product: Product):Product{
+    try { 
+        return productRepository.save(product)
 
     }
     catch (ex:Exception){
@@ -34,12 +31,12 @@ class InvoiceService {
     }
     }
 
-    fun update(invoice:Invoice): Invoice {
+    fun update(product:Product):   Product {
         try{
-            invoiceRepository.findById(invoice.id)
+            productRepository.findById(product.id)
                 ?: throw Exception("ID no existe")
 
-            return invoiceRepository.save(invoice)
+            return productRepository.save(product)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
@@ -47,14 +44,14 @@ class InvoiceService {
     }
 
 
-    fun updateTotal(invoice: Invoice): Invoice {
+    fun updateStock(product: Product): Product {
         try{
-            val response = invoiceRepository.findById(invoice.id)
+            val response = productRepository.findById(product.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                total =invoice.total
+                stock =product.stock
             }
-            return invoiceRepository.save(response)
+            return productRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

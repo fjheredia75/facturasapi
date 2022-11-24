@@ -1,10 +1,9 @@
-CREATE TABLE IF NOT EXISTS invoice(
-    id SERIAL,
-    code VARCHAR (100) NOT NULL,
-    create_at DATE NOT NULL,
-    total DECIMAL (8,2),
-    client_id INT NOT NULL,
-    PRIMARY KEY (id),
-    UNIQUE(code),
-    FOREIGN KEY (client_id) REFERENCES client(id)
-);
+CREATE TABLE IF  NOT EXISTS detail(
+     id SERIAL,
+     quantity INT NOT NULL,
+     invoice_id  INT NOT NULL,
+     product_id  INT NOT NULL,
+     PRIMARY KEY (id),
+     FOREIGN KEY (invoice_id) REFERENCES invoice (id),
+     FOREIGN KEY (product_id) REFERENCES product (id)
+   );

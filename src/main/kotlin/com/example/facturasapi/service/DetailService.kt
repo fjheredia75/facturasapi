@@ -1,33 +1,34 @@
 package com.example.facturasapi.service
 
-import com.example.facturasapi.model.Client
-import com.example.facturasapi.repository.ClientRepository
+
+import com.example.facturasapi.model.Detail
+import com.example.facturasapi.repository.DetailRepository
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
 @Service
-class ClientService {
+class DetailService {
 
     @Autowired
-    lateinit var clientRepository: ClientRepository
+    lateinit var detailRepository: DetailRepository
 
-    fun list():List<Client>{
-        return clientRepository.findAll()
+    fun list():List<Detail>{
+        return detailRepository.findAll()
     }
 
 
-    fun save(client: Client):Client{
-        return clientRepository.save(client)
+    fun save(detail: Detail):Detail{
+        return detailRepository.save(detail)
     }
 
-    fun update(client:Client): Client {
+    fun update(detail:Detail): Detail {
         try{
-            clientRepository.findByid(client.id)
+            detailRepository.findById(detail.id)
                 ?: throw Exception("ID no existe")
 
-            return clientRepository.save(client)
+            return detailRepository.save(detail)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
@@ -35,14 +36,14 @@ class ClientService {
     }
 
 
-    fun updateName(client:Client): Client {
+    fun updateQuantity(detail:Detail): Detail {
         try{
-            val response = clientRepository.findByid(client.id)
+            val response = detailRepository.findById(detail.id)
                 ?: throw Exception("ID no existe")
             response.apply {
-                fullname =client.fullname
+                quantity =detail.quantity
             }
-            return clientRepository.save(response)
+            return detailRepository.save(response)
         }
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)

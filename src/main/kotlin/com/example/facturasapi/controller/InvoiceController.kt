@@ -7,20 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import javax.validation.Valid
 
 @RestController
-@RequestMapping("/invoice")
+@RequestMapping("/controller")
 class InvoiceController {
 
     @Autowired
     lateinit var  invoiceService: InvoiceService
 
     @GetMapping
-    fun list():List<Invoice>{
-        return invoiceService.list()
+    fun list():ResponseEntity<*>{
+        return ResponseEntity(invoiceService.list(), HttpStatus.OK)
+    }
+    @GetMapping("/totals/{total}")
+    fun listTotals (@PathVariable("total") total: Double ):ResponseEntity<*>{
+        return ResponseEntity(invoiceService.listTotalMoreThan(total), HttpStatus.OK)
     }
     @PostMapping
-    fun save(@RequestBody invoice:Invoice):ResponseEntity<Invoice>{
+    fun save(@RequestBody @Valid invoice:Invoice):ResponseEntity<Invoice>{
         return ResponseEntity(invoiceService.save(invoice), HttpStatus.OK)
     }
 
