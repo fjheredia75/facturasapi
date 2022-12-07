@@ -12,5 +12,5 @@ interface InvoiceRepository:JpaRepository<Invoice, Long> {
 
     @Query(nativeQuery = true)
     fun findTotalMoreThan(@Param("total") total: Double?):List<Invoice>?
-    fun findById (id: Long?): Invoice?
+    fun findById (id: Long?): Invoice
 }

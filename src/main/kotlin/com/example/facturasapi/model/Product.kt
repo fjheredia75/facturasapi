@@ -16,6 +16,6 @@ class Product {
     var description : String? = null
     @NotBlank
     var brand: String? = null
-
     var stock: Long? = null
+    var price: Double? = null
 }
