@@ -20,6 +20,10 @@ class InvoiceService {
     fun list():List<Invoice>{
         return invoiceRepository.findAll()
     }
+
+    fun listById (id: Long?): Invoice{
+        return invoiceRepository.findById(id)
+    }
     fun listTotalMoreThan(total:Double?): List<Invoice>? {
         return invoiceRepository.findTotalMoreThan(total)
     }

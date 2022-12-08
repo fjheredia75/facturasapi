@@ -20,6 +20,11 @@ class ClientController {
     fun list():List<Client>{
         return clientService.list()
     }
+
+    @GetMapping("/{id}")
+    fun listById (@PathVariable ("id") id: Long):ResponseEntity<Client>{
+        return ResponseEntity(clientService.listById(id), HttpStatus.OK)
+    }
     @PostMapping
     fun save(@RequestBody @Valid client:Client):ResponseEntity<Client>{
         return ResponseEntity(clientService.save(client), HttpStatus.OK)
@@ -32,6 +37,10 @@ class ClientController {
     @PatchMapping
     fun updateName (@RequestBody client:Client):ResponseEntity<Client>{
         return ResponseEntity(clientService.updateName(client), HttpStatus.OK)
+    }
+    @DeleteMapping("/delete/{id}")
+    fun delete (@PathVariable("id") id: Long):Boolean?{
+        return clientService.delete(id)
     }
 
 }

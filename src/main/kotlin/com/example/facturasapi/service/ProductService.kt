@@ -5,6 +5,7 @@ import com.example.facturasapi.repository.ProductRepository
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
+import org.springframework.stereotype.Repository
 import org.springframework.stereotype.Service
 import org.springframework.web.server.ResponseStatusException
 
@@ -19,7 +20,9 @@ class ProductService {
     fun list():List<Product>{
         return productRepository.findAll()
     }
-
+    fun listById (id: Long?): Product{
+        return productRepository.findById(id)
+    }
 
     fun save(product: Product):Product{
     try { 
@@ -57,6 +60,7 @@ class ProductService {
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
     }
+
 
 }
 

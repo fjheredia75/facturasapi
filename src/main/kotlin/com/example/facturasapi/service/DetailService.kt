@@ -24,6 +24,9 @@ class DetailService {
     fun list():List<Detail>{
         return detailRepository.findAll()
     }
+    fun listById (id: Long?): Detail{
+        return detailRepository.findById(id)
+    }
 
 
     fun save(detail: Detail): Detail {

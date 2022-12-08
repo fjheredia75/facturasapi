@@ -17,6 +17,9 @@ class ClientService {
         return clientRepository.findAll()
     }
 
+    fun listById (id: Long?): Client{
+        return clientRepository.findByid(id)
+    }
 
     fun save(client: Client):Client{
         return clientRepository.save(client)
@@ -47,6 +50,12 @@ class ClientService {
         catch (ex:Exception){
             throw ResponseStatusException(HttpStatus.NOT_FOUND,ex.message)
         }
+    }
+    fun delete (id: Long):Boolean?{
+        clientRepository.findById(id) ?:
+        throw  Exception()
+        clientRepository.deleteById(id!!)
+        return true
     }
 
 }

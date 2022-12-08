@@ -20,6 +20,10 @@ class ProductController {
     fun list():List<Product>{
         return productService.list()
     }
+    @GetMapping("/{id}")
+    fun listById (@PathVariable ("id") id: Long):ResponseEntity<Product>{
+        return ResponseEntity(productService.listById(id), HttpStatus.OK)
+    }
     @PostMapping
     fun save(@RequestBody @Valid product:Product):ResponseEntity<Product>{
         return ResponseEntity(productService.save(product), HttpStatus.OK)
@@ -33,5 +37,6 @@ class ProductController {
     fun updateName (@RequestBody product:Product):ResponseEntity<Product>{
         return ResponseEntity(productService.updateStock(product), HttpStatus.OK)
     }
+
 
 }
